@@ -1,3 +1,5 @@
+import {API_URL} from "../../constants/configs";
+
 export default function apiClientMiddleware({dispatch, getState}) {
     return (next) => (action) => {
         const {
@@ -59,48 +61,45 @@ export default function apiClientMiddleware({dispatch, getState}) {
         // if (queryParameters) {
         //     encodedUrl = encodeParametersInUrl(url, queryParameters);
         // }
-        let finalUrl = 'http/192.168.0.11:8080/' + encodedUrl;
-        console.log(finalUrl);
+        let finalUrl = API_URL() + encodedUrl;
+        // console.log(finalUrl);
         return fetch(finalUrl, fetchParams)
             .then(response => {
-            //         console.log(finalUrl);
-            //         console.log("HEHEHE", response);
-            //         return response;
-            //     }
-                response
-                    .json()
-                    .then(json => {
-                        console.log("ENTERED SUCCESS");
-                        if (response.status === 401) {
-                            // dispatch(logout());
-                            // dispatch(push('/login'));
-                        }
+                    response
+                        .json()
+                        .then(json => {
+                            // console.log("ENTERED SUCCESS");
+                            if (response.status === 401) {
+                                // dispatch(logout());
+                                // dispatch(push('/login'));
+                            }
 //TODO make sure this is right
-                        let actionType = failureType;
-                        if (response.status >= 200 && response.status < 300) {
-                            actionType = successType;
-                            if (successSideEffects) {
-                                successSideEffects(json);
+                            let actionType = failureType;
+                            if (response.status >= 200 && response.status < 300) {
+                                actionType = successType;
+                                if (successSideEffects) {
+                                    successSideEffects(json);
+                                }
+                            } else {
+                                // toastr.error(_t(apiResponses[json.error] || json.error, {message: json.message}));
                             }
-                        } else {
-                            // toastr.error(_t(apiResponses[json.error] || json.error, {message: json.message}));
-                        }
-                        if (json.error) {
-                            let translatedError = _t(json.error, {message: json.message, ...(json.extra_details || {})});
-                            if (translatedError === json.error) {
+                            if (json.error) {
+                                let translatedError = _t(json.error, {message: json.message, ...(json.extra_details || {})});
+                                if (translatedError === json.error) {
+                                }
+                                // dispatch(showAlert("RootWorker", DIALOG_IDS.API_ERROR, translatedError));
                             }
-                            // dispatch(showAlert("RootWorker", DIALOG_IDS.API_ERROR, translatedError));
-                        }
-                        // dispatch(showAlert("RootWorker", DIALOG_IDS.API_ERROR, url));
-                        dispatch(Object.assign({}, payload, {
-                            response: json,
-                            type: actionType,
-                            ...(extraData || {}),
-                        }));
-                    })
+                            // dispatch(showAlert("RootWorker", DIALOG_IDS.API_ERROR, url));
+                            dispatch(Object.assign({}, payload, {
+                                response: json,
+                                type: actionType,
+                                ...(extraData || {}),
+                            }));
+                        })
+                }
             ).catch(error => {
-                console.log(finalUrl);
-                console.log("HAHAHA", error);
+                // console.log(finalUrl);
+                console.log(error);
                 // dispatch(showAlert("RootWorker", DIALOG_IDS.API_ERROR, 'COULD_NOT_CONTACT_SERVER'));
                 dispatch(Object.assign({}, payload, {
                     response: {error},
