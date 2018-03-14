@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {connect} from "react-redux";
 import {login} from "../redux/modules/auth";
+import {animateComponent} from "../decorators";
 
 @connect((state, ownProps) => ({
     username: state.auth.username,
@@ -8,7 +9,12 @@ import {login} from "../redux/modules/auth";
 }), {
     login,
 })
+@animateComponent('app')
 export default class App extends React.PureComponent {
+    //
+    // componentDidMount(){
+    //     this.props.login("123");
+    // }
 
     authenticate() {
         let {login} = this.props;
@@ -20,10 +26,6 @@ export default class App extends React.PureComponent {
     }
 
     render() {
-        return <div style={{display: 'flex', flexDirection: 'column'}}>
-            Hello world!
-            <input type="file" accept="image/*" capture="camera"/>
-            <button onClick={this.authenticate.bind(this)}/>
-        </div>
+        return <view>ASDQWE</view>
     }
 }
