@@ -6,6 +6,8 @@ const GET_PROFILE_FAIL = 'auth/GET_PROFILE_FAIL';
 const INITIAL_STATE = {};
 
 
+//TODO merge auth with profile since profile arrives in login response
+
 export default function (state = INITIAL_STATE, action) {
     switch(action.type){
         case GET_PROFILE:

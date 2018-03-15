@@ -17,10 +17,10 @@ export default function (state = INITIAL_STATE, action) {
     }
 }
 
-export function showElement(componentId, isVisible) {
+export function showElement(componentId, elementUniqueId, isVisible) {
     return {
         type: SHOW_ELEMENT,
-        componentId,
+        componentId: componentId + '_' + elementUniqueId,
         isVisible,
     }
 }
