@@ -3,7 +3,7 @@ import {NAVIGATOR_PAGES} from "../../constants/enums";
 const NAVIGATE_TO_SCREEN_ACTION = 'NAVIGATE_TO_SCREEN_ACTION';
 
 const INITIAL_STATE = {
-    screen: NAVIGATOR_PAGES.SPLASH
+    screen: NAVIGATOR_PAGES.ADD_GUEST
 };
 
 export default function (state = INITIAL_STATE, action) {

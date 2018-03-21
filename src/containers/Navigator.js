@@ -3,6 +3,8 @@ import {login} from "../redux/modules/auth";
 import {connect} from "react-redux";
 import {NAVIGATOR_PAGES} from "../constants/enums";
 import {navigateToScreen} from "../redux/modules/navigator";
+import {AddGuest} from "../components/AddGuest";
+import {View} from "./View";
 
 
 @connect((state, ownProps) => ({
@@ -25,19 +27,21 @@ export class Navigator extends React.PureComponent {
         switch (screenId) {
             case NAVIGATOR_PAGES.SPLASH:
                 return null;
+            case NAVIGATOR_PAGES.ADD_GUEST:
+                return AddGuest;
         }
     }
 
     render() {
 
-        let Screen = this.getComponent()
+        let Screen = this.getComponent();
 
         return (
-            <div>
+            <View>
                 <Screen
                     {...this.props}
                 />
-            </div>
+            </View>
         )
     }
 }
