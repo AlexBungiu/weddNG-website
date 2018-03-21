@@ -13,7 +13,7 @@ import {navigateToScreen} from "../redux/modules/navigator";
     login,
     navigateToScreen,
 })
-class Navigator extends React.PureComponent {
+export class Navigator extends React.PureComponent {
 
     constructor(props) {
         super(props);
@@ -33,11 +33,11 @@ class Navigator extends React.PureComponent {
         let Screen = this.getComponent()
 
         return (
-            <view>
+            <div>
                 <Screen
                     {...this.props}
                 />
-            </view>
+            </div>
         )
     }
 }
