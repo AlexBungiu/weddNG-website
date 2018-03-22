@@ -27,6 +27,7 @@ export function animateComponent(componentId) {
                             isVisible &&
                             <Child
                                 {...this.props}
+                                showElement={showElement.bind(this)}
                             />
                         }
                     </div>
